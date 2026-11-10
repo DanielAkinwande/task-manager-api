@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taskflow — Task Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="authView" class="auth-layout">
+    <section class="auth-card">
+      <div class="brand"><span class="brand-mark">✓</span><span>taskflow</span></div>
+      <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+      <h1 id="authTitle">Welcome back.</h1>
+      <p class="muted" id="authSubtitle">Sign in to pick up where you left off.</p>
+
+      <form id="authForm">
+        <div id="usernameField" class="field hidden">
+          <label for="username">Username</label>
+          <input id="username" name="username" autocomplete="username" placeholder="e.g. daniel">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+        </div>
+        <button class="button primary full" id="authSubmit" type="submit">Sign in <span>→</span></button>
+      </form>
+      <p class="auth-switch"><span id="switchText">New to Taskflow?</span> <button id="switchMode" class="text-button" type="button">Create an account</button></p>
+      <p id="authMessage" class="message" role="status"></p>
+    </section>
+    <aside class="auth-aside">
+      <div class="aside-orb orb-one"></div><div class="aside-orb orb-two"></div>
+      <div class="aside-content">
+        <div class="quote-mark">“</div>
+        <h2>Make room for<br><em>what matters.</em></h2>
+        <p>A calmer way to keep track of the work that moves you forward.</p>
+        <div class="aside-bottom"><span class="pulse"></span> YOUR DAY, IN GOOD HANDS</div>
+      </div>
+    </aside>
+  </main>
+
+  <main id="appView" class="app-layout hidden">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">✓</span><span>taskflow</span></div>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active" data-filter="all"><span class="nav-icon">▦</span> All tasks <span class="nav-count" id="allCount">0</span></button>
+      <button class="nav-item" data-filter="pending"><span class="nav-icon">◷</span> In progress <span class="nav-count" id="pendingCount">0</span></button>
+      <button class="nav-item" data-filter="completed"><span class="nav-icon">✓</span> Completed <span class="nav-count" id="completedCount">0</span></button>
+      <div class="sidebar-bottom">
+        <div class="profile-chip"><div class="avatar" id="avatar">U</div><div class="profile-info"><strong id="profileName">User</strong><span id="profileEmail">Signed in</span></div></div>
+        <button id="logoutButton" class="logout-button">↪ <span>Log out</span></button>
+      </div>
+    </aside>
+
+    <section class="main-panel">
+      <header class="topbar">
+        <div><p class="eyebrow" id="todayLabel">YOUR WORKSPACE</p><h1 id="greeting">Your tasks.</h1></div>
+        <button id="addTaskTop" class="button primary"><span>＋</span> New task</button>
+      </header>
+
+      <section class="welcome-strip">
+        <div><p class="welcome-kicker">A LITTLE PROGRESS ADDS UP</p><h2 id="progressTitle">Let's make today count.</h2><p id="progressSubtitle">Add a task and get moving.</p></div>
+        <div class="progress-ring" id="progressRing"><div><strong id="progressPercent">0%</strong><span>completed</span></div></div>
+      </section>
+
+      <section class="task-heading">
+        <div><p class="eyebrow">YOUR LIST</p><h2 id="listTitle">All tasks <span id="visibleCount">0</span></h2></div>
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search tasks..."></div>
+      </section>
+
+      <form id="taskForm" class="task-form hidden">
+        <div class="form-heading"><div><p class="eyebrow">TASK DETAILS</p><h3 id="formTitle">Create a task</h3></div><button type="button" id="closeForm" class="icon-button" aria-label="Close">×</button></div>
+        <label for="taskTitle">Title</label><input id="taskTitle" maxlength="160" placeholder="What needs to get done?" required>
+        <label for="taskDescription">Description <span class="optional">OPTIONAL</span></label><textarea id="taskDescription" rows="3" maxlength="1000" placeholder="Add a few details..."></textarea>
+        <div class="form-actions"><button type="button" id="cancelForm" class="button subtle">Cancel</button><button type="submit" class="button primary" id="saveTask">Save task</button></div>
+      </form>
+
+      <div id="loadingState" class="empty-state"><div class="loader"></div><p>Loading your tasks...</p></div>
+      <div id="taskList" class="task-list"></div>
+      <div id="emptyState" class="empty-state hidden"><div class="empty-icon">✳</div><h3 id="emptyTitle">Nothing here yet.</h3><p id="emptyText">Add your first task and make a little progress.</p><button id="emptyAdd" class="button primary">＋ Create a task</button></div>
+      <p id="appMessage" class="message" role="status"></p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
